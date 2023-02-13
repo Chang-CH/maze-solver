@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- switch to production jquery -->
+    <script src="jquery-3.5.1.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="styles.css" rel="stylesheet">
+    <script defer src="script.js"></script>
+    <title>Maze Solver</title>
+</head>
+<body>
+    <div class="container">
+        <div id="controls-container" class="controls-container">
+            <select name="algorithm-select" id="algo-select" class = "algo-selector">
+                <option value="a-star">A star</option>
+                <option value="djisktra">Djisktra</option>
+                <option value="bfs">Breadth First</option>
+                <option value="bestfs">Best First</option>
+            </select>
+            <label for="maze-width">maze width: </label>
+            <input type="number" id="maze-width" value="10" class="entry">
+            <label for="maze-height">maze height: </label>
+            <input type="number" id="maze-height" value="10" class="entry">
+            <button class="btn" id="grid-btn">Create grid</button>
+            <button class="btn" id="solve-btn">Solve maze</button>
+            <button class="btn" id="help-btn">Help</button>
+            <div id="modal" class="modal">
+                <div class="modal-content">
+                    <span class="close" id="close-span">&times;</span>
+                    <p>
+                        Drawing the maze:<br>
+                        1. Set the width and height of the maze via the text entries on the top bar<br>
+                        2. Click create grid to initialize the maze<br>
+                        3. Select the nodes you want to place (start, end, walls) from the palette below<br>
+                        4. Click the spot on the grid to place the node<br>
+                        5. To undo a wall, click on it again<br><br>
+                        Getting the path:<br>
+                        1. Click on Solve Maze on the top bar<br>
+                        2. Dark blue tiles indicate tiles that have been traversed<br>
+                        &emsp;Light blue indicates paths that are waiting to be traversed<br>
+                        &emsp;Green indicates the path taken<br>
+                        3. Move the range slider on the bottom bar to move through the steps taken to solve the maze<br>
+                        4. Click RESET on the bottom bar to remove the path
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="maze-container" id="maze-container">
+            <table id= "maze-grid" class="maze-grid">
+                <tbody id= "maze-body" class="maze-body">
+                    <td data-x= "5" data-y= "4"></td>
+                </tbody>
+            </table>
+        </div>
+        <div class="palette-container">
+            <div class="draw-container">
+                <script>function changemode(id){mode=id;}</script>
+                <button class="btn-palette wall" onclick="changemode(0)">wall</button>
+                <button class="btn-palette start" onclick="changemode(1)">start</button>
+                <button class="btn-palette end" onclick="changemode(2)">end</button>
+            </div>
+            <input type="range" id="stepper" min="0" max="0" value="0" class="stepper">
+            <div>
+                <button class="btn-palette reset" id="reset-btn">RESET</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<!-- to add: stepper slider -->
+<!-- to implement: clear solution -->
